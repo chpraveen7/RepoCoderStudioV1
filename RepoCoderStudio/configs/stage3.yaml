@@ -1,0 +1,35 @@
+# Stage 3 — Python -> Java translation
+stage: 3
+name: py2java
+seed: 42
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  load_in_4bit: true          # 7B in 4-bit fits a 16 GB T4
+  dtype: auto
+comparison_models:
+  - deepseek-ai/deepseek-coder-6.7b-instruct
+  - Salesforce/codegen-350M-multi
+
+dataset:
+  name: xlcost                # one of: xlcost | codenet | transcoder | synthetic
+  pair: python-java
+  split: test
+
+generation:
+  max_new_tokens: 768
+  temperature: 0.2
+  top_p: 0.95
+  do_sample: false
+
+evaluation:
+  java:
+    javac: javac              # toolchain on PATH; see docs/03_environments.md
+    java: java
+    compile_timeout_s: 30
+    run_timeout_s: 10
+
+metrics: [compilation_success, execution_correctness, ast_similarity, codebleu]
+
+limit: 20
+output_dir: outputs/stage3

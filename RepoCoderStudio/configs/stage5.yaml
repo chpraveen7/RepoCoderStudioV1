@@ -1,0 +1,35 @@
+# Stage 5 — Retrieval-Augmented Generation
+stage: 5
+name: rag
+seed: 42
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  load_in_4bit: true
+  dtype: auto
+
+retrieval:
+  embedder: BAAI/bge-small-en-v1.5
+  reranker: BAAI/bge-reranker-base
+  index: faiss                # flat L2 by default
+  top_k_retrieve: 20
+  top_k_rerank: 5
+
+task:
+  kind: nl2python             # nl2python | py2java — which baseline to augment
+  corpus: [humaneval, mbpp]   # retrieval corpora from earlier stages
+
+generation:
+  max_new_tokens: 512
+  temperature: 0.2
+  do_sample: false
+
+evaluation:
+  compute_baseline: true      # also run WITHOUT rag for attributable deltas
+  k: [1]
+  execution_timeout_s: 10
+
+metrics: [retrieval_precision, pass_k, execution_accuracy, codebleu]
+
+limit: 20
+output_dir: outputs/stage5

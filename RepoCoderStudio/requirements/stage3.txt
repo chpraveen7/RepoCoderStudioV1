@@ -1,0 +1,7 @@
+# Stage 3 — Python->Java. Adds Java AST tooling.
+# NOTE: a JDK (javac/java) must be installed at the SYSTEM level — not via pip.
+#   Colab:  apt-get install -y default-jdk
+#   Mac:    brew install openjdk
+-r stage2.txt
+
+javalang

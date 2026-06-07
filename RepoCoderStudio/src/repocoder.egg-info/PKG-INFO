@@ -1,3 +1,10 @@
+Metadata-Version: 2.4
+Name: repocoder
+Version: 0.1.0
+Summary: RepoCoder Studio — a phased, repository-aware AI coding assistant
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+
 # RepoCoder Studio
 
 A **repository-aware AI coding assistant** built as a phased capstone project. It automates

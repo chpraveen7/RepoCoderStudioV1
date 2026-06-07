@@ -1,0 +1,4 @@
+# Stage 2 — NL->Python. Adds synthesis benchmarks. (Execution sandbox uses only the stdlib.)
+-r stage1.txt
+
+evalplus

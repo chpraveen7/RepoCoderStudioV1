@@ -1,0 +1,28 @@
+# Stage 1 — Code Understanding & Documentation
+stage: 1
+name: documentation
+seed: 42
+
+model:
+  id: Salesforce/codegen-350M-multi
+  load_in_4bit: false          # 350M fits in fp16/fp32 anywhere
+  dtype: auto
+comparison_models: []          # add e.g. Qwen/Qwen2.5-Coder-1.5B-Instruct to compare
+
+dataset:
+  name: code_search_net        # one of: codocbench | code_search_net | synthetic
+  config: python
+  split: test
+  task: docstring             # generate a docstring/summary for a function
+
+generation:
+  max_new_tokens: 128
+  temperature: 0.2
+  top_p: 0.95
+  do_sample: false
+  num_return_sequences: 1
+
+metrics: [codebleu, codebertscore, rouge_l]
+
+limit: 50                      # cap examples for quick runs; null = all
+output_dir: outputs/stage1

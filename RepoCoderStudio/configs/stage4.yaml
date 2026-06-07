@@ -1,0 +1,28 @@
+# Stage 4 — Repository awareness
+stage: 4
+name: repo_awareness
+seed: 42
+
+model:
+  id: deepseek-ai/deepseek-coder-6.7b-instruct
+  load_in_4bit: true
+  dtype: auto
+
+dataset:
+  name: repobench             # one of: repobench | swe_bench_lite | local_repo | synthetic
+  split: test
+
+indexing:
+  chunking: ast               # ast | lines
+  languages: [python, java]
+  build_dependency_graph: true
+
+retrieval:
+  backends: [dense, bm25]     # compare dense vs lexical baseline
+  top_k: 10
+
+metrics: [retrieval_precision, retrieval_recall, mrr_at_k, file_function_id_accuracy]
+mrr_k: 10
+
+limit: 10
+output_dir: outputs/stage4

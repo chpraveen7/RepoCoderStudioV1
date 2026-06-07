@@ -1,0 +1,31 @@
+# Stage 2 — Natural Language -> Python
+stage: 2
+name: nl2python
+seed: 42
+
+model:
+  id: Qwen/Qwen2.5-Coder-1.5B-Instruct   # 7B on Colab Pro/Kaggle (set load_in_4bit: true)
+  load_in_4bit: false
+  dtype: auto
+comparison_models:
+  - deepseek-ai/deepseek-coder-1.3b-instruct
+
+dataset:
+  name: humaneval             # one of: humaneval | mbpp | evalplus | synthetic
+  split: test
+
+generation:
+  max_new_tokens: 512
+  temperature: 0.2            # raise (e.g. 0.8) for pass@k>1 sampling
+  top_p: 0.95
+  do_sample: false
+  num_return_sequences: 1     # set to k for pass@k
+
+evaluation:
+  k: [1]                      # pass@k values to report
+  execution_timeout_s: 10     # per-candidate sandbox timeout
+
+metrics: [pass_k, execution_accuracy, codebleu]
+
+limit: 20
+output_dir: outputs/stage2

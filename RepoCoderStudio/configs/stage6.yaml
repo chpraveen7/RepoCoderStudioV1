@@ -1,0 +1,26 @@
+# Stage 6 — Agentic coding assistant
+stage: 6
+name: agentic
+seed: 42
+
+model:
+  id: Qwen/Qwen2.5-Coder-7B-Instruct
+  load_in_4bit: true
+  dtype: auto
+
+dataset:
+  name: swe_bench_lite        # swe_bench_lite | synthetic
+  split: test
+
+agent:
+  framework: langgraph
+  nodes: [planner, retriever, generator, validator]
+  max_steps: 8
+  retry_on_validation_fail: true
+  max_retries: 2
+  checkpoint: true            # persist state between nodes
+
+metrics: [task_success_rate, workflow_success_rate, end_to_end_accuracy]
+
+limit: 3
+output_dir: outputs/stage6

@@ -1,0 +1,5 @@
+# Stage 6 — Agentic orchestration. Adds the agent graph framework.
+-r stage5.txt
+
+langgraph
+langchain-core

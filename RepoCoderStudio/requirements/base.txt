@@ -1,0 +1,15 @@
+# Shared by every stage. Versions left loose so Colab/Kaggle resolve compatible CUDA wheels.
+# Pin these once a stage is validated.
+torch
+transformers>=4.44
+accelerate
+datasets
+huggingface_hub
+pyyaml
+numpy
+pandas
+tqdm
+pytest
+
+# 4-bit quantization — CUDA-only. Safe to leave installed; model_loader.py skips it on MPS/CPU.
+bitsandbytes ; platform_system != "Darwin"

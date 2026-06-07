@@ -1,0 +1,7 @@
+# Stage 5 — RAG. Adds dense retrieval + reranking.
+# Use faiss-gpu instead of faiss-cpu on a CUDA host for large indexes.
+-r stage4.txt
+
+faiss-cpu
+sentence-transformers
+FlagEmbedding

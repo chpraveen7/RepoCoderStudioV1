@@ -1,0 +1,14 @@
+# Stage 1 — Documentation. Adds documentation/code metrics.
+-r base.txt
+
+evaluate
+rouge_score
+sacrebleu
+nltk
+bert-score
+codebleu
+# CodeBLEU's AST/data-flow terms need a tree-sitter parser. codebleu>=0.7 uses the standalone
+# per-language grammars (tree-sitter-python), which require tree-sitter>=0.23 — note the older
+# `tree_sitter_languages` package is pinned to tree-sitter<0.23 and is incompatible here.
+tree-sitter>=0.23
+tree-sitter-python>=0.23

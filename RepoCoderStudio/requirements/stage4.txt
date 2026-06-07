@@ -1,0 +1,6 @@
+# Stage 4 — Repository awareness. Adds repo parsing, graphs, lexical retrieval baseline.
+-r stage3.txt
+
+gitpython
+networkx
+rank-bm25
